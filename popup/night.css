@@ -1,0 +1,26 @@
+.body {
+    background-color:#28322c;
+}
+
+#title {
+    color:forestgreen;
+    text-align: center;
+    font-family: Cooper Black;
+    font-size: large;
+}
+
+span {
+	display: block;
+    text-decoration: none;
+	text-align: center;
+    color: darkgreen;
+    
+    font-family: Cooper Black;
+    cursor: pointer;
+}
+
+.toggle-label::before {
+    background-color: #33722a;
+}
+
+

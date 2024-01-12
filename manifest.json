@@ -1,0 +1,46 @@
+{
+  "manifest_version": 3,
+  "name": "Video-Remember",
+  "description": "The 11 version",
+  "version": "1",
+  "icons": {
+    "16": "images/icon-16.png",
+    "32": "images/icon-32.png",
+    "48": "images/icon-48.png",
+    "128": "images/icon-128.png"
+  },
+  "permissions": [
+    "storage",
+    "activeTab",
+    "tabs",
+    "webNavigation",
+    "scripting"
+  ],
+  "host_permissions": [
+    "https://www.youtube.com/*",
+    "https://www.icourse163.org/*",
+    "https://www.bilibili.com/*"
+
+  ],
+  "action": {
+    "default_popup": "popup/popup.html"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": [ "https://www.bilibili.com/*" ],
+      "run_at": "document_start",
+      "js": [ "content/shadowInject.js" ]
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": [ "content/injected.js" ],
+      "matches": [ "https://www.bilibili.com/*" ]
+    }
+  ] ,
+  "options_page": "options/op.html"
+
+}

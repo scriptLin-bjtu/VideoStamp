@@ -1,0 +1,25 @@
+.body{
+    background-color:aliceblue;
+}
+
+#title {
+    color: lightskyblue;
+    text-align: center;
+    font-family: Cooper Black;
+    font-size: large;
+}
+
+span {
+	display:block;
+    text-decoration: none;
+   text-align: center;
+    color: darkgray;
+    
+    font-family: Cooper Black;
+    cursor: pointer;
+}
+
+.toggle-label::before {
+    background-color: aliceblue;
+}
+

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+  
+  <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" id="theme-style" href="day.css">
+ <title>Video Time Stamp</title>
+</head>
+<body>
+
+    <div class="container-sm body" id="maincontain" style="width: 25rem;height:13.5rem;">
+
+        <p id="title">
+            Video Time Stamp<p />
+        <div class=" toggle-switch">
+            <input type="checkbox" id="switch" class="toggle-input">
+            <label for="switch" class="toggle-label" id="toggle-label"></label>
+
+        </div>
+         
+        <div class="input-group mb-3">
+
+            <input type="text" class="form-control"  id="name" placeholder="type your video moment name" aria-label="text with button addon" aria-describedby="record">
+            <button class="btn btn-outline-secondary" type="button" id="record">Record</button>
+        </div>
+        <div style="height: 1rem;"></div>
+        <div class="input-group">
+            <select class="form-select text-secondary" id="select" aria-label="select with button addon">
+                <option selected value="">Choose...</option>
+            </select>
+            <button class="btn btn-outline-secondary"  id="deliver" type="button">Go</button>
+            <button class="btn btn-outline-secondary" id="delete" type="button">Delete</button>
+        </div>
+        <div style="height: 1rem;"></div>
+        <span id="optionspage">more information & setting</span>
+       
+
+
+
+
+
+    </div>
+
+
+
+
+
+
+    <script src="bootstrap/bootstrap.bundle.min.js"></script>
+   <script src="popup.js"></script>
+  
+
+
+
+</body>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		<!-- Bootstrap CSS -->
+		<link href="bootstrap/bootstrap.min.css" rel="stylesheet">
+		<title></title>
+	
+	</head>
+	<body>
+		<div class="container-fluid">
+		      
+		<nav class="navbar navbar-expand-sm bg-light">
+		 <a class="navbar-brand" href="#" id="title" style="width: 11rem;">Video Time Stamp</a>
+		  
+		      <button class="btn btn-outline-dark" style="margin-right:1rem; width: 6rem;" id="btn-s">Setting</button>
+		    
+		      <button class="btn btn-outline-dark" style="margin-right:1rem; width: 6rem;" id="btn-n">Note</button>
+		    
+		      <button class="btn btn-outline-dark" id="btn-a" style="width: 6rem;">About</button>
+		    
+		 
+		</nav>
+		
+		      <div class="Container">
+				 
+					  <div class="Setting" id="setting" style="margin-top: 1rem;">
+						  <div class="container-fluid">
+							  
+							  <div style="margin-top: 1rem;">
+								  <label id="tip1">Set your extension theme color:</label>
+								  <input type="color" class="form-control form-control-color" id="BackgroundColorInput" value="#aaffff" title="Choose your color">
+								  <label id="tip2">Set your extension text color:</label>
+								  <input type="color" class="form-control form-control-color" id="TextColorInput" value="#aaffff" title="Choose your color">
+								  <button class="btn btn-outline-dark" style="width: 6rem;margin-top: 1rem;" id="btn-color">Change</button>
+							  </div>
+							  
+							  
+							  <button class="btn btn-outline-dark" style="width: 6rem;margin-top: 1rem;" id="btn-chinese">简体中文</button>
+							  <button class="btn btn-outline-dark" style="width: 6rem;margin-top: 1rem;" id="btn-english">English</button>
+							  							  
+						  </div>
+						  
+					  </div>
+				 
+				  		<div class="Note" id="note" style="display: none;"> 
+						
+						<table class="table table-hover" id="table" style="margin-top: 1rem;">
+						  <thead>
+						    <tr>
+						      <th scope="col" id="th1">name</th>
+						      <th scope="col" id="th2">url</th>
+						      <th scope="col" id="th3">video_time</th>
+						    </tr>
+						  </thead>
+						  <tbody>
+						    
+						  </tbody>
+						</table>
+						</div>			  
+				  
+				  		<div class="About" id=about style="display: none;">
+							<label id="about-author" style="margin-bottom: 1rem;">Developer:Uranus</label>
+							<br>
+							<label id="about-version" style="margin-bottom: 1rem;">Version:0.3</label>
+							<p id="about-explain" style="margin-bottom: 1rem;">The Video Time Stamp is a browser extension program dedicated to optimizing your browser video viewing experience. 
+							You can use it in various ways, such as online course notes, movie moments, long video navigation, etc. This extension is permanently free to use.
+							 If you are satisfied with it, please give us a good review!</p>
+							 <a href="#" id="edge_page">--->go to review</a>
+							
+						</div>			  
+				
+		      </div>
+		
+		
+		    </div>
+		
+		
+		<script src="options.js"></script>
+		    <script src="bootstrap/bootstrap.bundle.min.js"></script>
+
+	</body>
+</html>
