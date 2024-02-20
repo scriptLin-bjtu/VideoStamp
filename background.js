@@ -1,80 +1,127 @@
-let db, data = [],
-	request = indexedDB.open("myDatabase2", 2);
-request.onupgradeneeded = function(e) {
-	(db = e.target.result)
-	.createObjectStore("myStore", {
-			keyPath: "id",
-			autoIncrement: !0
-		})
-		.createIndex("nameIndex", "name", {
-			unique: !1
-		})
-}, request.onsuccess = function(e) {
-	(db = e.target.result)
-	.transaction(["myStore"], "readonly")
-		.objectStore("myStore")
-		.openCursor()
-		.onsuccess = function(e) {
-			let t = e.target.result;
-			t && (data.push(t.value), t.continue())
-		}
-}, request.onerror = function(e) {}, chrome.runtime.onMessage.addListener(function(e, t, o) {
-	if (e.getDataFromIndexedDB && o({
-		dataFromIndexedDB: data
-	}), e.dataToBackground) {
-		let t = db.transaction(["myStore"], "readwrite");
-		t.objectStore("myStore")
-			.add({
-				name: e.dataToBackground.name,
-				url: e.dataToBackground.url,
-				videoTime: e.dataToBackground.videoTime
-			}), data.push({
-				name: e.dataToBackground.name,
-				url: e.dataToBackground.url,
-				videoTime: e.dataToBackground.videoTime
-			}), t.oncomplete = function() {
-				o({
-					success: !0
-				})
-			}
-	}
-	if (e.deleteValueFromIndexedDB) {
-		let t, n = db.transaction(["myStore"], "readwrite")
-			.objectStore("myStore"),
-			r = e.deleteValueFromIndexedDB;
-		n.openCursor()
-			.onsuccess = function(e) {
-				let a = e.target.result;
-				if (a) {
-					let e = a.value;
-					e.name === r && (t = n.delete(a.primaryKey), data.pop(e), t.onsuccess = function() {
-						o({
-							success: !0
-						})
-					}), a.continue()
-				}
-			}
-	}
-}), chrome.webNavigation.onCompleted.addListener(function(e) {
-	chrome.tabs.query({
-		active: !0,
-		currentWindow: !0
-	}, function(e) {
-		chrome.storage.local.get(["time", "url"])
-			.then(t => {
-				let o = e[0];
-				t.url === o.url && setTimeout(function() {
-					chrome.scripting.executeScript({
-						target: {
-							tabId: e[0].id
-						},
-						function: function(e) {
-							let t = document.querySelector("video");
-							t && (t.currentTime = e)
-						},
-						args: [t.time]
-					})
-				}, 1e3)
-			})
-	})
+let db;
+let data = [];
+// �򿪻򴴽� IndexedDB ���ݿ�
+let request = indexedDB.open('myDatabase2', 2);
+
+request.onupgradeneeded = function (event) {
+    // �����ݿ�����ʱ���������洢
+    db = event.target.result;
+    let store = db.createObjectStore('myStore', { keyPath: 'id', autoIncrement: true });
+    store.createIndex('nameIndex', 'name', { unique: false });
+    console.log('yes creat');
+};
+
+request.onsuccess = function (event) {
+    // ���ݿ��ѳɹ�����
+    db = event.target.result;
+
+    let transaction = db.transaction(['myStore'], 'readonly');
+    let store = transaction.objectStore('myStore');
+    let cursorRequest = store.openCursor();
+
+    cursorRequest.onsuccess = function (event) {
+        let cursor = event.target.result;
+        if (cursor) {
+            console.log(cursor.value);
+            data.push(cursor.value);
+            cursor.continue();
+        }
+    };
+    console.log('suc load');
+};
+
+request.onerror = function (event) {
+    // �򿪻򴴽����ݿ�ʱ��������
+    console.error('ero:', event.target.errorCode);
+};
+
+// ��������popup����Ϣ
+chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
+    if (request.getDataFromIndexedDB) {
+
+        sendResponse({ dataFromIndexedDB: data });
+
+    }
+    if (request.dataToBackground) {
+        // �洢���ݵ����ݿ�
+        let transaction = db.transaction(['myStore'], 'readwrite');
+        let store = transaction.objectStore('myStore');
+
+        store.add({
+            name: request.dataToBackground.name,
+            url: request.dataToBackground.url,
+            videoTime: request.dataToBackground.videoTime
+        });
+        data.push({
+            name: request.dataToBackground.name,
+            url: request.dataToBackground.url,
+            videoTime: request.dataToBackground.videoTime
+        });
+        transaction.oncomplete = function () {
+            console.log('store ok');
+            sendResponse({ success: true });
+        };
+    }
+    if (request.deleteValueFromIndexedDB) {
+
+        let transaction = db.transaction(['myStore'], 'readwrite');
+        let store = transaction.objectStore('myStore');
+
+        let valueToDelete = request.deleteValueFromIndexedDB;
+
+        // ʹ�����������������洢������ƥ���ļ�¼
+        let deleteRequest;
+        // ʹ���α����������洢�Բ���ƥ���ļ�¼
+        let cursorRequest = store.openCursor();
+
+        cursorRequest.onsuccess = function (event) {
+            let cursor = event.target.result;
+            if (cursor) {
+               let record = cursor.value;
+                if (record.name === valueToDelete) {
+                    // �ҵ�ƥ���ļ�¼��ִ��ɾ������
+                    deleteRequest = store.delete(cursor.primaryKey);
+                    data.pop(record);
+                    deleteRequest.onsuccess = function () {
+                        console.log('delete ok');
+                        sendResponse({ success: true });
+                    };
+                }
+                cursor.continue(); // ����������һ����¼
+            }
+        };
+
+    }
+
+});
+//��Ƶ��վ��ת���ɺ�ִ����Ƶʱ�䴦��
+chrome.webNavigation.onCompleted.addListener(function (details) {
+    console.log("complete1");
+
+    chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+
+        chrome.storage.local.get(["time", "url"]).then((result) => {
+            let currentTab = tabs[0];
+            if (result.url === currentTab.url) {
+                console.log("complete2");
+                setTimeout(function () {
+                    console.log("complete3");
+                    chrome.scripting.executeScript({
+                        target: { tabId: tabs[0].id },
+                        function: function (arg1) {
+                            let videoElement = document.querySelector('video');
+                            if (videoElement) {
+                                videoElement.currentTime = arg1;
+                            }
+                        },
+                        args: [result.time]
+                    });
+                }, 1000);
+            }
+
+        });
+
+
+    });
+
 });
