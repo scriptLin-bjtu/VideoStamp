@@ -9,17 +9,15 @@ document.getElementById('switch').addEventListener('change', function () {
         chrome.storage.local.set({ mode:"night" }).then(() => {
 			
             themeStyle.href = 'night.css';
-			chrome.storage.local.get(["bkcolor","tcolor"]).then((result) => {
-				console.log(result);
-				title.style.color=result.tcolor;
-				optionslink.style.color=result.tcolor;
-				body.style.backgroundColor=result.bkcolor;
-				label.style.backgroundColor=result.tcolor;
-				let style=document.createElement('style');
-				    let change=document.createTextNode('.toggle-label::before{background-color:'+result.bkcolor+';}')//更改后伪元素的样式
-				    style.appendChild(change);
-				    document.body.appendChild(style);//把内联样式表添加到html中
-				
+            chrome.storage.local.get(["bkcolor","tcolor"]).then((result) => {
+            title.style.color = result.tcolor || "forestgreen";
+            optionslink.style.color = result.tcolor || "darkgreen";
+            body.style.backgroundColor = result.bkcolor || "#28322c";
+            label.style.backgroundColor = result.tcolor || "darkseagreen";
+            let style = document.createElement('style');
+            let change = document.createTextNode('.toggle-label::before{background-color:' + (result.bkcolor || "#33722a") + ';}');
+            style.appendChild(change);
+            document.body.appendChild(style);
 			});
         });
         
