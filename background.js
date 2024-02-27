@@ -1,10 +1,10 @@
 let db;
 let data = [];
-// �򿪻򴴽� IndexedDB ���ݿ�
+// 打开 IndexedDB 数据库
 let request = indexedDB.open('myDatabase2', 2);
 
 request.onupgradeneeded = function (event) {
-    // �����ݿ�����ʱ���������洢
+    // 数据库升级时创建对象存储空间
     db = event.target.result;
     let store = db.createObjectStore('myStore', { keyPath: 'id', autoIncrement: true });
     store.createIndex('nameIndex', 'name', { unique: false });
@@ -12,7 +12,7 @@ request.onupgradeneeded = function (event) {
 };
 
 request.onsuccess = function (event) {
-    // ���ݿ��ѳɹ�����
+    // 数据库打开成功后的处理
     db = event.target.result;
 
     let transaction = db.transaction(['myStore'], 'readonly');
@@ -31,11 +31,11 @@ request.onsuccess = function (event) {
 };
 
 request.onerror = function (event) {
-    // �򿪻򴴽����ݿ�ʱ��������
+    // 打开数据库时发生错误的处理
     console.error('ero:', event.target.errorCode);
 };
 
-// ��������popup����Ϣ
+// 监听来自 popup 页面的消息
 chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
     if (request.getDataFromIndexedDB) {
 
@@ -43,7 +43,7 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
 
     }
     if (request.dataToBackground) {
-        // �洢���ݵ����ݿ�
+                // 存储数据到数据库
         let transaction = db.transaction(['myStore'], 'readwrite');
         let store = transaction.objectStore('myStore');
 
@@ -69,9 +69,9 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
 
         let valueToDelete = request.deleteValueFromIndexedDB;
 
-        // ʹ�����������������洢������ƥ���ļ�¼
+        
         let deleteRequest;
-        // ʹ���α����������洢�Բ���ƥ���ļ�¼
+        
         let cursorRequest = store.openCursor();
 
         cursorRequest.onsuccess = function (event) {
@@ -79,7 +79,7 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
             if (cursor) {
                let record = cursor.value;
                 if (record.name === valueToDelete) {
-                    // �ҵ�ƥ���ļ�¼��ִ��ɾ������
+                    
                     deleteRequest = store.delete(cursor.primaryKey);
                     data.pop(record);
                     deleteRequest.onsuccess = function () {
@@ -87,14 +87,14 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
                         sendResponse({ success: true });
                     };
                 }
-                cursor.continue(); // ����������һ����¼
+                cursor.continue(); 
             }
         };
 
     }
 
 });
-//��Ƶ��վ��ת���ɺ�ִ����Ƶʱ�䴦��
+// 通过监听 webNavigation.onCompleted 事件实现在视频网站跳转时执行脚本
 chrome.webNavigation.onCompleted.addListener(function (details) {
     console.log("complete1");
 

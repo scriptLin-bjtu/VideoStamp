@@ -30,8 +30,8 @@ document.addEventListener('DOMContentLoaded', function (){
 	        tip1.textContent="设置扩展主题颜色:";
 	        tip2.textContent="设置扩展字体颜色:";
 	        btnC.textContent="修改";
-	        label1.textContent="开发者:uranus";
-	        label2.textContent="版本:0.3";
+	        label1.textContent="开发者:LPY";
+	        label2.textContent="版本:2.2";
 	        p1.textContent="视频时间戳是一个浏览器扩展程序，致力于提升您的浏览器视频观看体验，你可以在多方面使用到:视频网课笔记，电影时刻记录，长视频导航等等......该扩展永久免费使用。如果您对此满意，请给我们一个好评!";
 	        a1.textContent="--->去评价";
 	        th1.textContent="名称";
@@ -46,8 +46,8 @@ document.addEventListener('DOMContentLoaded', function (){
 			    tip1.textContent="Set your extension theme color:";
 			    tip2.textContent="Set your extension text color:";
 			    btnC.textContent="Change";
-			  label1.textContent="Developer:uranus";
-			   label2.textContent="Version:0.3";
+			  label1.textContent="Developer:LPY";
+			   label2.textContent="Version:2.2";
 			   p1.textContent="The Video Time Stamp is a browser extension program dedicated to optimizing your browser video viewing experience. You can use it in various ways, such as online course notes, movie moments, long video navigation, etc. This extension is permanently free to use. If you are satisfied with it, please give us a good review!";
 			a1.textContent="--->go to review";
 			th1.textContent="name";
@@ -163,8 +163,8 @@ document.getElementById('btn-chinese').addEventListener('click',function(){
 		  tip1.textContent="设置扩展主题颜色:";
 		  tip2.textContent="设置扩展字体颜色:";
 		  btnC.textContent="修改";
-		  label1.textContent="开发者:uranus";
-		  label2.textContent="版本:0.3";
+		  label1.textContent="开发者:LPY";
+		  label2.textContent="版本:2.2";
 		  p1.textContent="视频时间戳是一个浏览器扩展程序，致力于提升您的浏览器视频观看体验，你可以在多方面使用到:视频网课笔记，电影时刻记录，长视频导航等等......该扩展永久免费使用。如果您对此满意，请给我们一个好评!";
 		  a1.textContent="--->去评价";
 		  th1.textContent="名称";
@@ -197,8 +197,8 @@ document.getElementById('btn-english').addEventListener('click',function(){
 	      tip1.textContent="Set your extension theme color:";
 	      tip2.textContent="Set your extension text color:";
 	      btnC.textContent="Change";
-	    label1.textContent="Developer:uranus";
-	     label2.textContent="Version:0.3";
+	    label1.textContent="Developer:LPY";
+	     label2.textContent="Version:2.2";
 	     p1.textContent="The Video Time Stamp is a browser extension program dedicated to optimizing your browser video viewing experience. You can use it in various ways, such as online course notes, movie moments, long video navigation, etc. This extension is permanently free to use. If you are satisfied with it, please give us a good review!";
 	  a1.textContent="--->go to review";
 	  th1.textContent="name";

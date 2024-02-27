@@ -4,7 +4,7 @@
     width: 50px;
     height: 25px;
     margin-left: 20rem;
-    margin-top: -2rem;
+    margin-top: -4rem;
     margin-bottom: 1rem;
 }
 
@@ -42,4 +42,11 @@
 
 .toggle-input:checked + .toggle-label::before {
     transform: translate(20px, -50%);
+}
+
+.center-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 15%;
 }

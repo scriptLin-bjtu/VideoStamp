@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "Video-Remember",
+  "name": "Video Stamp",
   "description": "视频时间戳，轻松记录网页视频时刻",
-  "version": "2",
+  "version": "2.2",
   "icons": {
     "16": "images/icon-16.png",
     "32": "images/icon-32.png",

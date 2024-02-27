@@ -2,13 +2,18 @@
     background-color:aliceblue;
 }
 
-#title {
+#title{
     color: lightskyblue;
     text-align: center;
     font-family: Cooper Black;
     font-size: large;
 }
-
+#statement{
+	color:lightskyblue;
+	font-family: Cooper Black;
+	font-size: small;
+	margin-bottom: 2.5rem;
+}
 span {
 	display:block;
     text-decoration: none;
